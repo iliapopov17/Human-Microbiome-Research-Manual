@@ -32,7 +32,6 @@ library(data.table)
 library(openxlsx)
 library(MicrobeR)
 library(ggplot2)
-library(ggplot2)
 library(zCompositions)
 library(NearestBalance)
 library(GUniFrac)
@@ -91,7 +90,7 @@ Microbiome.Barplot(t(raw_abund), metadata, CATEGORY = "diagnosis_full")
 ```
 
 ```{r}
-ggsave("img/microbiome_barplot.png", width = 11, height = 3.5, dpi = 600)
+ggsave("img/microbiome_barplot.jpg", width = 11, height = 3.5, dpi = 300)
 ```
 
 **Is there enough coverage?**
@@ -108,7 +107,7 @@ ggplot(metadata) +
 ```
 
 ```{r}
-ggsave("img/coverage_quality.png", width = 11, height = 3.5, dpi = 600)
+ggsave("img/coverage_quality.jpg", width = 11, height = 3.5, dpi = 300)
 ```
 
 **Sequencing quality is sufficient**
@@ -134,7 +133,7 @@ ggplot(metadata)+
 ```
 
 ```{r}
-ggsave("img/post-filtration coverage.png", width = 11, height = 3.5, dpi = 600)
+ggsave("img/post-filtration coverage.jpg", width = 11, height = 3.5, dpi = 300)
 ```
 
 **What proportion of the microbes remained in the analysis**
@@ -148,7 +147,7 @@ ggplot(metadata)+
 ```
 
 ```{r}
-ggsave("img/remaining proportion.png", width = 11, height = 3.5, dpi = 600)
+ggsave("img/remaining proportion.jpg", width = 11, height = 3.5, dpi = 300)
 ```
 
 **How many samples and microbial samples?**
@@ -189,7 +188,7 @@ heatmap_with_split(abundance,
 ```
 
 ```{r}
-ggsave("img/relative abundance of the main microbial organisms.png", width = 8, height = 10, dpi = 600)
+ggsave("img/relative abundance of the main microbial organisms.jpg", width = 8, height = 10, dpi = 300)
 ```
 
 # **Counting alpha diversity**
@@ -211,7 +210,7 @@ ggplot(metadata) +
 ```
 
 ```{r}
-ggsave("img/alpha diversity.png", width = 8, height = 8, dpi = 600)
+ggsave("img/alpha diversity.jpg", width = 8, height = 8, dpi = 300)
 ```
 
 **Is it different?**
@@ -244,7 +243,7 @@ ggplot(cbind(metadata,pcoa_res)) +
 ```
 
 ```{r}
-ggsave("img/beta diversity.png", width = 8, height = 8, dpi = 600)
+ggsave("img/beta diversity.jpg", width = 8, height = 8, dpi = 300)
 ```
 
 **Is the difference statistically significant?**
@@ -272,7 +271,7 @@ heatmap_with_split(abundance = abundance[, unlist(nb$nb$b1)],
 ```
 
 ```{r}
-ggsave("img/heatmap with split.png", width = 10, height = 10, dpi = 600)
+ggsave("img/heatmap with split.jpg", width = 10, height = 10, dpi = 300)
 ```
 
 **Illustrating the difference between the average microbiota of healthy and sick people**
@@ -299,7 +298,7 @@ ggplot(tab) +
 ```
 
 ```{r}
-ggsave("img/mean difference.png", width = 10, height = 10, dpi = 600)
+ggsave("img/mean difference.jpg", width = 10, height = 10, dpi = 300)
 ```
 
 **Approximate, simplified difference**
@@ -312,7 +311,7 @@ ggplot(tab) +
 ```
 
 ```{r}
-ggsave("img/approximate difference.png", width = 10, height = 10, dpi = 600)
+ggsave("img/approximate difference.jpg", width = 10, height = 10, dpi = 300)
 ```
 
 **Balance value in each sample**
@@ -330,7 +329,7 @@ ggplot(metadata) +
 ```
 
 ```{r}
-ggsave("img/balance value.png", width = 8, height = 8, dpi = 600)
+ggsave("img/balance value.jpg", width = 8, height = 8, dpi = 300)
 ```
 
 **Has it changed?**

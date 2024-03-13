@@ -41,7 +41,7 @@ Data obtained from the article [«_A microbial signature for Crohn's disease_»]
 The abundance of various bacterial taxa in different samples is illustrated in the Figure 1. The samples are divided into two categories: CD and HC. Each vertical bar represents a specific sample, and the colors within each bar correspond to different types of bacteria. The height of each color segment indicates the relative abundance of that bacterial group within the sample. CD samples show distinct microbial composition compared to HC samples.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/microbiome_barplot.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/microbiome_barplot.jpg" align='center', width="50%">
 </div>
 
 _Figure 1. Microbiome Barplot._
@@ -49,7 +49,7 @@ _Figure 1. Microbiome Barplot._
 The coverage quality of the samples is represented in Figure 2. The x-axis shows the number of samples, and the y-axis represents the count of samples falling into each coverage range.  The quality of sequencing can be regarded as sufficient.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/coverage_quality.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/coverage_quality.jpg" align='center', width="50%">
 </div>
 
 _Figure 2. Coverage quality._
@@ -57,7 +57,7 @@ _Figure 2. Coverage quality._
 The post-filtration coverage of the samples is represented in Figure 3 and in Table 1.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/post-filtration%20coverage.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/post-filtration%20coverage.jpg" align='center', width="50%">
 </div>
 
 _Figure 3. Post-filtration coverage._
@@ -72,7 +72,7 @@ _Table 1. Mocrobial samples and coverage before and after filtration._
 The proportion of microbes remaining in the assay across different samples is illustrated in Figure 4.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/remaining%20proportion.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/remaining%20proportion.jpg" align='center', width="50%">
 </div>
 
 _Figure 4. Remaining proportion._
@@ -80,7 +80,7 @@ _Figure 4. Remaining proportion._
 The relative abundance of various microbial organisms in different samples is visualized in Figure 5. The x-axis represents the sample categories (CD and HC), while the y-axis lists the microbial taxa. The color intensity within each cell indicates the abundance percentage, with darker colors representing higher relative abundance.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/relative%20abundance%20of%20the%20main%20microbial%20organisms.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/relative%20abundance%20of%20the%20main%20microbial%20organisms.jpg" align='center', width="50%">
 </div>
 
 _Figure 5. Relative abundance of the main microbial organisms._
@@ -90,7 +90,7 @@ The boxplot in Figure 6. compares the alpha diversity (measured using the `Shann
 The _p_-value of `1.795217e-09` indicates a significant difference in alpha diversity between the two groups. CD samples exhibit lower alpha diversity compared to HC samples.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/alpha%20diversity.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/alpha%20diversity.jpg" align='center', width="50%">
 </div>
 
 _Figure 6. Alpha diversity._
@@ -100,7 +100,7 @@ The scatter plot in Figure 7 visualizes the beta diversity using the first two a
 The statistical analysis using the `adonis2` test shows that the difference in beta diversity between the two groups is statistically significant (p-value = 0.001).
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/beta%20diversity.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/beta%20diversity.jpg" align='center', width="50%">
 </div>
 
 _Figure 7. Beta diversity._
@@ -108,7 +108,7 @@ _Figure 7. Beta diversity._
 The heatmap in Figure 8 visualizes the relative abundance of microbial taxa in different samples, split into two categories: “health-related” and “disease-related.” The color intensity represents the abundance percentage, with darker colors indicating higher abundance.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/heatmap%20with%20split.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/heatmap%20with%20split.jpg" align='center', width="50%">
 </div>
 
 _Figure 8. Heatmap with split._
@@ -116,7 +116,7 @@ _Figure 8. Heatmap with split._
 The bar plot in Figure 9 illustrates the mean difference between CD and HC individuals for various microbial taxa. Each bar represents a specific taxon, and the x-axis shows the CLR(v) values. The dark blue bars indicate the direction and magnitude of the difference in abundance between the two groups.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/mean%20difference.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/mean%20difference.jpg" align='center', width="50%">
 </div>
 
 _Figure 9. Mean difference._
@@ -124,7 +124,7 @@ _Figure 9. Mean difference._
 The bar plot in Figure 10 illustrates the approximate, simplified difference between CD and HC individuals for various microbial taxa. Each bar represents a specific taxon, and the x-axis shows the CLR(b) values. The dark blue bars indicate the direction and magnitude of the difference in abundance between the two groups.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/approximate%20difference.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/approximate%20difference.jpg" align='center', width="50%">
 </div>
 
 _Figure 10. Approximate difference._
@@ -132,7 +132,7 @@ _Figure 10. Approximate difference._
 The boxplot in Figure 11 illustrates the balance value in each sample for two different categories: CD and HC. The x-axis represents the group labels, while the y-axis shows the balance values. The p-value of `2.621864e-17` indicates a significant difference in balance between the two groups.
 
 <div style='justify-content: center'>
-<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/balance%20value.png" align='center', width="50%">
+<img src="https://github.com/iliapopov17/Human-Microbiome-Research-User-Manual/blob/main/img/balance%20value.jpg" align='center', width="50%">
 </div>
 
 _Figure 11. Balance value._
