@@ -65,7 +65,7 @@ _Figure 3. Post-filtration coverage._
 |   |N microbes|Minimum coverage|
 |---|----------|----------------|
 |Before|210|19412|
-|After|12981|
+|After|89|12981|
 
 _Table 1. Mocrobial samples and coverage before and after filtration._
 
