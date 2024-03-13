@@ -1,0 +1,350 @@
+---
+title: "Human Microbiome Research"
+author: "Ilia Popov"
+date: "2023-05-13"
+output:
+  html_document:
+    latex_engine: xelatex
+    df_print: default
+    highlight: zenburn
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+bibliography: packages.bib
+mainfont: NanumGothic
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Loading libraries and data**
+
+**First, load all the libraries needed for the data analysis**
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(data.table)
+library(openxlsx)
+library(MicrobeR)
+library(ggplot2)
+library(ggplot2)
+library(zCompositions)
+library(NearestBalance)
+library(GUniFrac)
+library(vegan)
+library(ape)
+library(selbal)
+```
+ 
+**Then set the working directory**
+ 
+```{r}
+main_dir <- dirname(rstudioapi::getSourceEditorContext()$path) 
+setwd(main_dir)
+```
+
+**Load metadata and sort it by participant number**
+
+```{r}
+metadata = fread("data_Crohns_disease/metadata.csv")
+metadata[, .N, by = diagnosis_full]
+```
+
+**Load the Counts table**
+
+```{r}
+counts <- read.csv("data_Crohns_disease/counts.csv",row.names = 1)
+counts <- counts[metadata$sample, colSums(counts) >0]
+```
+
+## **Check the data**
+
+**How many samples and microbial samples?**
+
+```{r}
+dim(counts)
+```
+
+**What's the coverage?**
+
+```{r}
+range(rowSums(counts))
+```
+
+**Composition of samples**
+
+```{r}
+raw_abund <- counts/rowSums(counts)
+```
+
+```{r}
+metadata$SampleID <- metadata$sample
+```
+
+```{r, fig.align="center", dpi = 300, warning=FALSE}
+Microbiome.Barplot(t(raw_abund), metadata, CATEGORY = "diagnosis_full")
+```
+
+```{r}
+ggsave("img/microbiome_barplot.png", width = 11, height = 3.5, dpi = 600)
+```
+
+**Is there enough coverage?**
+
+```{r}
+metadata$coverage <- rowSums(counts)
+```
+
+```{r, fig.align="center", dpi = 300}
+ggplot(metadata) + 
+  geom_histogram(aes(coverage)) + 
+  theme_minimal() + 
+  xlab("N samples")
+```
+
+```{r}
+ggsave("img/coverage_quality.png", width = 11, height = 3.5, dpi = 600)
+```
+
+**Sequencing quality is sufficient**
+
+## **Filtration from rare and under-represented taxa**
+
+**Keeping the microbes that occur in >30% of samples**
+
+```{r}
+filt_counts <- counts[, colSums(counts>0)>0.3*nrow(counts)]
+metadata[, filt_coverage := rowSums(filt_counts)]
+metadata[, proportion_of_prevalent_taxa := 100*filt_coverage/coverage]
+```
+
+**Coverage of samples after filtration**
+
+```{r, fig.align="center", dpi = 300}
+ggplot(metadata)+
+  geom_histogram(aes(filt_coverage)) + 
+  theme_minimal()+
+  xlab("Post-filtration coverage") + 
+  ylab("N samples")
+```
+
+```{r}
+ggsave("img/post-filtration coverage.png", width = 11, height = 3.5, dpi = 600)
+```
+
+**What proportion of the microbes remained in the analysis**
+
+```{r, fig.align="center", dpi = 300}
+ggplot(metadata)+
+  geom_histogram(aes(proportion_of_prevalent_taxa)) + 
+  theme_minimal()+ 
+  xlab("Proportion of microbes remaining in the assay") + 
+  ylab("N samples")
+```
+
+```{r}
+ggsave("img/remaining proportion.png", width = 11, height = 3.5, dpi = 600)
+```
+
+**How many samples and microbial samples?**
+
+```{r}
+dim(filt_counts)
+```
+
+**What's the coverage?**
+
+```{r}
+range(rowSums(filt_counts))
+```
+
+```{r}
+matrix_data <- matrix(c("Before", 210, 19412,
+                         "After", 89, 12981), 
+                      nrow = 2, byrow = TRUE)
+
+data <- as.data.frame(matrix_data)
+
+colnames(data) <- c("", "N microbes", "Minimum coverage")
+
+print(data)
+```
+
+**Calculating relative abundances**
+
+```{r}
+abundance <- cmultRepl(filt_counts)
+```
+
+```{r, fig.align="center", dpi = 300}
+heatmap_with_split(abundance,
+                   metadata, ~ diagnosis_full,
+                   show_samp_names = F) + 
+  theme(axis.text.y = element_text(size =5))
+```
+
+```{r}
+ggsave("img/relative abundance of the main microbial organisms.png", width = 8, height = 10, dpi = 600)
+```
+
+# **Counting alpha diversity**
+
+```{r}
+alpha_div <- rowMeans(sapply(1:5, function(i){
+  counts_rar_i = Rarefy(counts, 19000)$otu.tab.rff
+  alpha_div_i = vegan::diversity(counts_rar_i)
+}))
+metadata$Shannon.index <- alpha_div[metadata$sample]
+```
+
+```{r, fig.align="center", dpi = 300}
+ggplot(metadata) + 
+  geom_boxplot(aes(diagnosis_full, Shannon.index, fill = diagnosis_full)) + 
+  theme_minimal() +
+  theme(legend.position = 'none') + 
+  xlab("")
+```
+
+```{r}
+ggsave("img/alpha diversity.png", width = 8, height = 8, dpi = 600)
+```
+
+**Is it different?**
+
+```{r}
+wilcox.test(Shannon.index ~ diagnosis_full, metadata)$p.value
+```
+
+# **Aitchison's beta diversity: is there a difference in proportions?**
+
+```{r}
+clr <- log(abundance) - rowMeans(log(abundance))
+beta_div <- dist(clr)
+```
+
+```{r}
+pcoa_res <- pcoa(beta_div)$vectors
+var <- apply(pcoa_res, 2, var)
+var_rel <- round(var*100/sum(var), 1)
+```
+
+```{r, fig.align="center", dpi = 300}
+ggplot(cbind(metadata,pcoa_res)) + 
+  geom_point(aes(Axis.1, Axis.2, col=diagnosis_full)) +
+  coord_fixed() + 
+  theme_minimal() + 
+  labs(col="") + 
+  xlab(paste0("Axis.1 (",var_rel[1], "%)")) + 
+  ylab(paste0("Axis.2 (",var_rel[2], "%)"))
+```
+
+```{r}
+ggsave("img/beta diversity.png", width = 8, height = 8, dpi = 600)
+```
+
+**Is the difference statistically significant?**
+
+```{r}
+adonis2(beta_div ~ metadata$diagnosis_full)
+```
+
+# **What exactly is the difference**
+
+```{r}
+nb <- nb_lm(abundance = abundance,
+            metadata = metadata,
+            pred = "diagnosis_full")
+```
+
+```{r, fig.align="center", dpi = 300}
+heatmap_with_split(abundance = abundance[, unlist(nb$nb$b1)],
+                   metadata = metadata,
+                   formula = ~ diagnosis_full,
+                   num_name = "health-related",
+                   den_name = "disease-related",
+                   show_samp_names = F,
+                   balance = nb$nb$b1)
+```
+
+```{r}
+ggsave("img/heatmap with split.png", width = 10, height = 10, dpi = 600)
+```
+
+**Illustrating the difference between the average microbiota of healthy and sick people**
+
+```{r}
+psi <- make_psi_from_sbp(nb$coord$sbp)
+mean_diff_clr <- drop(nb$lm_res$coefficients[2,] %*% psi)
+bal_unit <- balance_to_clr(nb$nb$b1, colnames(abundance))
+bal_diff_clr <- drop(bal_unit %*% mean_diff_clr) * bal_unit
+tab <- data.table(taxon = names(mean_diff_clr),
+                  clr_diff = mean_diff_clr,
+                  bal = bal_diff_clr)
+setorderv(tab, "clr_diff")
+tab$taxon <- factor(tab$taxon, levels = tab$taxon)
+```
+
+**Mean difference between sick and healthy individuals**
+
+```{r, fig.align="center", dpi = 300}
+ggplot(tab) + 
+  geom_col(aes(clr_diff, taxon), fill = "darkblue") + 
+  theme_minimal() + xlab("CLR(v)") + ylab("") + 
+  theme(axis.text.y = element_text(size =5))
+```
+
+```{r}
+ggsave("img/mean difference.png", width = 10, height = 10, dpi = 600)
+```
+
+**Approximate, simplified difference**
+
+```{r, fig.align="center", dpi = 300}
+ggplot(tab) + 
+  geom_col(aes(bal, taxon), fill = "darkblue") + 
+  theme_minimal() + xlab("CLR(b)") + ylab("") +
+  theme(axis.text.y = element_text(size =5))
+```
+
+```{r}
+ggsave("img/approximate difference.png", width = 10, height = 10, dpi = 600)
+```
+
+**Balance value in each sample**
+
+```{r}
+metadata$balance <- balance.fromSBP(abundance, nb$nb$sbp)
+```
+
+```{r, fig.align="center", dpi = 300}
+ggplot(metadata) + 
+  geom_boxplot(aes(diagnosis_full, balance, fill = diagnosis_full)) + 
+  theme_minimal() +
+  theme(legend.position = 'none') + 
+  xlab("") 
+```
+
+```{r}
+ggsave("img/balance value.png", width = 8, height = 8, dpi = 600)
+```
+
+**Has it changed?**
+
+```{r}
+wilcox.test(balance ~ diagnosis_full, metadata)$p.value
+```
+
+# **References**
+
+The following packages must be installed to work with the dataset:
+
+```{r}
+knitr::write_bib(c("data.table", "openxlsx", "MicrobeR", "ggplot2",
+                   "zCompositions", "NearestBalance", "GUniFrac",
+                   "vegan", "ape", "selbal"), file = "packages.bib")
+```
