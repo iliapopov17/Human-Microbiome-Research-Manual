@@ -1,5 +1,5 @@
 ## Human-Microbiome-Research-User-Manual
-This repository contains a report on a project that was carried out as part of the training course «_Human Microbiome Research - User Manual_» by Blastim
+> This repository contains a report on a project that was carried out as part of the training course «_Human Microbiome Research - User Manual_» by Blastim
 
 ## Introduction
 The gut microbiome plays a crucial role in human health, influencing immune responses, metabolism, and disease susceptibility. Crohn’s Disease, a chronic inflammatory bowel disease, has been associated with microbial dysbiosis. Understanding the microbial alterations in Crohn’s Disease can provide insights into disease mechanisms and potential therapeutic targets.
