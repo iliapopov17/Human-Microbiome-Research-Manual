@@ -3,6 +3,10 @@
 > Materials of the repository were prepared on the basis of materials of the educational intensive from the Blastim<br>
 > It can be used as a helpful repository with cheat-sheets for 16s rRNA amplicon based metagenome studies.
 
+- `Human Microbiome Research.Rmd` - contains detailed manual of this study
+- `Human Microbiome Research.html` - contains the same manual in `html` format
+- Below is a description of the study and a biological interpretation of the results in thesis format
+
 ## Introduction
 The gut microbiome plays a crucial role in human health, influencing immune responses, metabolism, and disease susceptibility. Crohn’s Disease, a chronic inflammatory bowel disease, has been associated with microbial dysbiosis. Understanding the microbial alterations in Crohn’s Disease can provide insights into disease mechanisms and potential therapeutic targets.
 
