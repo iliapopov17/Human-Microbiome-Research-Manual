@@ -5,6 +5,7 @@
 
 - `Human Microbiome Research.Rmd` - contains detailed manual of this study
 - `Human Microbiome Research.html` - contains the same manual in `html` format
+- `data_Crohns_disease` - contains the data (`counts.csv`, `metadata.csv`)
 - Below is a description of the study and a biological interpretation of the results in thesis format
 
 ## Introduction
@@ -158,11 +159,3 @@ Functional metagenomic analyses are warranted to explore specific pathways assoc
 ### Balance and Dysbiosis
 The “Balance Value” boxplot (Figure 11) indicates differences in microbial balance between CD and HC. Dysbiosis (imbalance) may disrupt homeostasis and contribute to disease pathogenesis.
 CD samples exhibit lower balance values, suggesting altered microbial interactions and potential loss of beneficial cross-feeding relationships.
-
-## Data availability
-
-In this repository you can find:
-
-1) `Human Microbiome Research.Rmd` - contains the whole script of the study
-2) `Human Microbiome Research.html` - contains the report on the study
-3) `data_Crohns_disease` - contains the data (`counts.csv`, `metadata.csv`)
