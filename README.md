@@ -1,6 +1,6 @@
 ## Human Microbiome Research Manual
 
-> Materials of the repository were prepared on the basis of materials of the educational intensive from the Blastim<br>
+> Materials of the repository were prepared on the basis of the educational intensive from Blastim<br>
 > It can be used as a helpful repository with cheat-sheets for 16s rRNA amplicon based metagenome studies.
 
 - `Human Microbiome Research.Rmd` - contains detailed manual of this study
