@@ -6,7 +6,7 @@
 - `Human Microbiome Research.Rmd` - contains detailed manual of this study
 - `Human Microbiome Research.html` - contains the same manual in `html` format
 - `data_Crohns_disease` - contains the data (`counts.csv`, `metadata.csv`)
-- Below is a description of the study and a biological interpretation of the results in thesis format
+- Below is the description of the study and a biological interpretation of the results in thesis format
 
 ## Introduction
 The gut microbiome plays a crucial role in human health, influencing immune responses, metabolism, and disease susceptibility. Crohn’s Disease, a chronic inflammatory bowel disease, has been associated with microbial dysbiosis. Understanding the microbial alterations in Crohn’s Disease can provide insights into disease mechanisms and potential therapeutic targets.
